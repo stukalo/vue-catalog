@@ -1,0 +1,49 @@
+// page
+@minPageWidth: 1200px;
+
+// text color
+@primaryText: #ffffff;
+@primaryTextOpacity: #ffffff80;
+@activeText: #f65261;
+@positiveText: #a1e66f;
+
+// background color
+@activeBackground: #F65261;
+@primaryBackground: #232323;
+@disabledBackground: #424242;
+@secondaryBackground: #555555;
+@secondaryBackgroundOpacity: #55555570;
+
+// font
+@fontFamily: 'Quicksand', sans-serif;
+@letterSpacing: .1rem;
+.fontMixin(@fs) {
+  font-size: @fs;
+  font-family: @fontFamily;
+  letter-spacing: @letterSpacing;
+}
+
+// border radius
+@primaryBorderRadius: 3px;
+.boxMixin(@size) {
+  width: @size;
+  height: @size;
+}
+
+
+.layerMixin(@imageUrl, @blur, @brightness) {
+  z-index: -1;
+  position: absolute;
+  top: -@blur;
+  left: -@blur;
+  .boxMixin(100%);
+  filter: brightness(@brightness);
+
+  div {
+    .boxMixin(calc(100% + 2 * @blur));
+    background-size: cover;
+    background-image: url(@imageUrl);
+    filter: blur(@blur);
+  }
+}
+

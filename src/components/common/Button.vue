@@ -1,34 +1,31 @@
 <template>
-  <button class="button" @click="onClick">
+  <button class='button' @click='onClick'>
     <slot/>
   </button>
 </template>
-
 <script>
 export default {
   name: 'Button',
-
   methods: {
     onClick() {
-      /**
-       * Click event
-       *
-       * @event click
-       */
       this.$emit('click');
     },
   },
 };
 </script>
+<style scoped lang="less">
+@import (reference) '../../assets/css/variables.less';
 
-<style scoped>
-  button {
-    border: 1px solid #eee;
-    border-radius: 3px;
-    background-color: #ffffff;
-    cursor: pointer;
-    font-size: 15pt;
-    padding: 3px 10px;
-    margin: 10px;
-  }
+button {
+  width: 230px;
+  height: 60px;
+  border: none;
+  padding: 0;
+  color: @primaryText;
+  border-radius: @primaryBorderRadius;
+  text-transform: uppercase;
+  background-color: @activeBackground;
+  cursor: pointer;
+  .fontMixin(25px);
+}
 </style>
