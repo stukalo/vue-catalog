@@ -10,7 +10,7 @@ const SearchResultsTemplate = (args) => ({
   setup() {
     return { args };
   },
-  template: '<SearchResults v-bind="args"/>',
+  template: '<div style="height: 100vh; display: flex;"><SearchResults v-bind="args"/></div>',
   methods: {},
 });
 

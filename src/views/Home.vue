@@ -44,10 +44,18 @@ export default {
 .home {
   position: relative;;
   min-width: @minPageWidth;
+  min-height: @minPageHeight;
+  display: flex;
+  flex-direction: column;
 }
 
 .home_header {
-  width: 100%;
-  position: absolute;
+  .headerMixin();
+}
+
+.home_main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 </style>

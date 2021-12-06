@@ -12,7 +12,7 @@
           {{film.title}}
         </span>
         <div class="title-block_rating rating">
-          <span class="rating_value">{{film.imdbRating.toFixed(1)}}</span>
+          <span class="rating_value">{{this.getRating()}}</span>
         </div>
       </div>
       <div class="details_genre">
@@ -36,9 +36,18 @@
 </template>
 
 <script>
+import { average } from '../../utils/average';
+
 export default {
   name: 'FilmDetails',
   props: ['film'],
+  methods: {
+    getRating() {
+      const { imdbRating, ratings } = this.film;
+      const rating = imdbRating || average(ratings);
+      return rating.toFixed(1);
+    },
+  },
 };
 </script>
 

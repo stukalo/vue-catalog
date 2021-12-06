@@ -25,6 +25,7 @@ export default {
 <style scoped lang="less">
 @import "../../assets/css/variables.less";
 .header {
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   height: 60px;

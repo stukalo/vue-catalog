@@ -24,6 +24,7 @@ import films from '../mock/films.json';
 import Header from '../components/common/Header.vue';
 import Footer from '../components/common/Footer.vue';
 import FilmDetails from '../components/film-details/FilmDetails.vue';
+import { findBy } from '../utils/findBy';
 
 export default {
   name: 'About',
@@ -33,10 +34,20 @@ export default {
     Header,
     SearchResults,
   },
-  data: () => ({
-    film: films[0],
-    films: films.slice(0, 9),
-  }),
+  props: ['id'],
+  watch: {
+    $route() {
+      const { id } = this.$route.params;
+      this.film = findBy('id', id, films);
+    },
+  },
+  data() {
+    const { id } = this.$route.params;
+    return {
+      film: findBy('id', id, films),
+      films: films.slice(0, 9),
+    };
+  },
 };
 </script>
 <style scoped lang="less">
@@ -49,7 +60,6 @@ export default {
 }
 
 .about_header {
-  width: 100%;
-  position: absolute;
+  .headerMixin();
 }
 </style>
