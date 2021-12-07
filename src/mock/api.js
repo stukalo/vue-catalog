@@ -18,17 +18,19 @@ export const getFilms = (query) => new Promise((resolve) => {
       from = 0,
       count = 9,
       sort = {
-        by: 'imdbRating',
+        by: 'rating',
         dir: 'desc',
       },
       search = null,
     } = query;
 
     const filtered = search
-      ? films.filter((film) => film[search.by] === film[search.value])
+      ? films.filter((film) => film[search.by] === search.value)
       : films;
     const sorted = sortBy(filtered, sort);
-    resolve(sorted.slice(from, from + count));
+    const result = sorted.slice(from, from + count);
+    debugger;
+    resolve(result);
   } catch (e) {
     resolve([]);
   }

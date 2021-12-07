@@ -1,7 +1,7 @@
 <template>
   <div class="film-card" @click="this.onCardClick(film.id)">
     <div class="film-card_poster">
-      <img :src="film.posterurl"/>
+      <img :src="film.posterUrl"/>
     </div>
     <div class="film-card_description description">
       <div class="description_title-block title-block">
@@ -9,7 +9,7 @@
           <span>{{ film.title }}</span>
         </div>
         <div class="title-block_year">
-          <span>{{ film.releaseDate.split('-')[0] }}</span>
+          <span>{{ film.year }}</span>
         </div>
       </div>
       <div class="title-block_genre">

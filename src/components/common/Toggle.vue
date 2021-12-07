@@ -22,6 +22,9 @@
 export default {
   name: 'Toggle',
   props: ['title', 'options'],
+  mounted() {
+    console.log('> options', this.options);
+  },
   methods: {
     onChange(value) {
       this.$emit('change', value);
@@ -62,6 +65,7 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  background-color: @primaryBackgroundOpacity;
 
   &.active {
     background-color: @activeBackground;

@@ -47,7 +47,7 @@ export default {
   margin: 0 14px 0 0;
   color: @primaryText;
   border-radius: @primaryBorderRadius;
-  background-color: @secondaryBackgroundOpacity;
+  background-color: @primaryBackgroundOpacity;
   .fontMixin(22px);
 
   &:focus-visible {

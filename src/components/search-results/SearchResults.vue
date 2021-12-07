@@ -1,7 +1,7 @@
 <template>
   <div class="search-results">
     <div class="search-results_filter">
-      <ResultsFilter/>
+      <ResultsFilter v-bind:sort="sort" @sorting="this.handleSorting"/>
     </div>
     <div class="search-results_cards">
       <div class="search-results_empty"
@@ -28,17 +28,73 @@ import { getFilms } from '../../mock/api';
 
 export default {
   name: 'SearchResults',
-  components: { ResultsFilter, FilmCard },
-  methods: {
-    async getInitialResults() {
-      this.results = await getFilms({});
-    },
+  components: {
+    ResultsFilter,
+    FilmCard,
   },
-  data: () => ({
-    results: [],
-  }),
-  beforeMount() {
+  data() {
+    return {
+      isLoading: false,
+      hasNext: true,
+      results: [],
+      sort: { by: 'year', dir: 'desc' },
+    };
+  },
+  mounted() {
+    console.log('> mounted', this.sort);
+    window.addEventListener('scroll', this.handleScroll);
     this.getInitialResults();
+  },
+  unmounted() {
+    console.log('> unmounted');
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    async handleSorting(value) {
+      console.log('> handleSorting', value);
+      const sort = { by: value, dir: 'desc' };
+      this.sort = sort;
+      this.results = await getFilms({ sort });
+    },
+    async getInitialResults() {
+      console.log('> getInitialResults');
+      const { sort } = this;
+      this.results = await getFilms({ sort });
+    },
+    async getNextResults() {
+      console.log('> getNextResults');
+      const { sort } = this;
+      this.isLoading = true;
+
+      const results = await getFilms({
+        from: this.results.length,
+        sort,
+      });
+
+      if (results.length) {
+        this.results = [...this.results, ...results];
+      } else {
+        this.hasNext = false;
+      }
+
+      this.isLoading = false;
+    },
+    handleScroll() {
+      if (this.isLoading || !this.hasNext) {
+        return;
+      }
+
+      const {
+        scrollTop,
+        offsetHeight,
+      } = document.documentElement;
+
+      const bottomOfWindow = scrollTop + window.innerHeight >= offsetHeight;
+
+      if (bottomOfWindow) {
+        this.getNextResults();
+      }
+    },
   },
 };
 </script>

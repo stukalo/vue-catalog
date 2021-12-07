@@ -3,49 +3,64 @@
     <div class="film-details_layer layer">
       <div class="layer_image"/>
     </div>
-    <div class="film-details_poster">
-      <img :src="film.posterurl"/>
-    </div>
-    <div class="film-details_details details">
-      <div class="details_title-block title-block">
+    <div class="film-details_film film" v-if="!!film">
+      <div class="film_poster">
+        <img :src="film.posterUrl"/>
+      </div>
+      <div class="film_info info">
+        <div class="info_title-block title-block">
         <span class="title-block_title">
           {{film.title}}
         </span>
-        <div class="title-block_rating rating">
-          <span class="rating_value">{{this.getRating()}}</span>
+          <div class="title-block_rating rating">
+            <span class="rating_value">{{film.rating}}</span>
+          </div>
         </div>
-      </div>
-      <div class="details_genre">
-        <span>{{film.genres.join(', ')}}</span>
-      </div>
-      <div class="details_stats stats">
-        <div class="stats_year year">
-          <span class="year_value">1000</span>
-          <span class="year_units">year</span>
+        <div class="info_genre">
+          <span>{{film.genres.join(', ')}}</span>
         </div>
-        <div class="stats_duration duration">
-          <span class="duration_value">157</span>
-          <span class="duration_units">min</span>
+        <div class="info_stats stats">
+          <div class="stats_year year">
+            <span class="year_value">{{film.year}}</span>
+            <span class="year_units">year</span>
+          </div>
+          <div class="stats_duration duration">
+            <span class="duration_value">{{film.runtime}}</span>
+            <span class="duration_units">min</span>
+          </div>
         </div>
-      </div>
-      <div class="details_details">
-        <p>{{film.storyline}}</p>
+        <div class="info_plot">
+          <p>{{film.plot}}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { average } from '../../utils/average';
+import { getFilms } from '../../mock/api';
 
 export default {
   name: 'FilmDetails',
-  props: ['film'],
+  props: ['id'],
+  data() {
+    return {
+      film: null,
+    };
+  },
+  beforeMount() {
+    this.getFilm();
+  },
+  updated() {
+    if (this.film?.id !== this.id) {
+      this.getFilm();
+    }
+  },
   methods: {
-    getRating() {
-      const { imdbRating, ratings } = this.film;
-      const rating = imdbRating || average(ratings);
-      return rating.toFixed(1);
+    getFilm() {
+      getFilms({ search: { by: 'id', value: Number(this.id) } }).then((films) => {
+        this.film = films[0];
+      });
     },
   },
 };
@@ -67,7 +82,7 @@ export default {
   .layerMixin("../../assets/img/cinema.jpg", 5px, 0.4);
 }
 
-.film-details_poster {
+.film_poster {
   height: 400px;
   width: 300px;
 
@@ -76,7 +91,11 @@ export default {
   }
 }
 
-.film-details_details {
+.film-details_film {
+  display: flex;
+}
+
+.film_info {
   padding: 12px 0 12px 60px;
 }
 
@@ -104,12 +123,12 @@ export default {
   color: @positiveText;
 }
 
-.details_genre {
+.info_genre {
   font-size: 16px;
   margin-top: 10px;
 }
 
-.details_stats {
+.info_stats {
   margin-top: 30px;
   display: flex;
 }
@@ -134,7 +153,7 @@ export default {
   color: @activeText;
 }
 
-.details_details {
+.info_plot {
   margin-top: 20px;
   font-size: 18px;
   line-height: 1.4;

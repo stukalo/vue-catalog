@@ -4,8 +4,8 @@
       <Header/>
     </header>
     <main class="about_main">
-      <FilmDetails :film="this.film"/>
-      <SearchResults :results="this.films"/>
+      <FilmDetails :id="id"/>
+      <SearchResults/>
     </main>
     <footer class="about_footer">
       <Footer/>
@@ -20,11 +20,9 @@ h1 {
 </style>
 <script>
 import SearchResults from '../components/search-results/SearchResults.vue';
-import films from '../mock/films.json';
 import Header from '../components/common/Header.vue';
 import Footer from '../components/common/Footer.vue';
 import FilmDetails from '../components/film-details/FilmDetails.vue';
-import { findBy } from '../utils/findBy';
 
 export default {
   name: 'About',
@@ -34,18 +32,16 @@ export default {
     Header,
     SearchResults,
   },
-  props: ['id'],
   watch: {
     $route() {
       const { id } = this.$route.params;
-      this.film = findBy('id', id, films);
+      this.id = id;
     },
   },
   data() {
     const { id } = this.$route.params;
     return {
-      film: findBy('id', id, films),
-      films: films.slice(0, 9),
+      id,
     };
   },
 };
