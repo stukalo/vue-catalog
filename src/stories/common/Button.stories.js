@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import Button from '../../components/common/Button.vue';
 
 export default {
-  title: 'Button',
+  title: 'common/Button',
 };
 
 export const template = () => ({

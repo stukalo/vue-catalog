@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { action } from '@storybook/addon-actions';
-import ResultsFilter from '../../components/search-results/ResultsFilter.vue';
+import ResultsFilter from '../../components/search-results/components/ResultsFilter.vue';
 
 export default {
-  title: 'ResultsFilter',
+  title: 'search-results/ResultsFilter',
 };
 
 const ResultsFilterTemplate = (args) => ({

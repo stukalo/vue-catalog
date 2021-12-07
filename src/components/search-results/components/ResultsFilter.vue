@@ -1,40 +1,24 @@
 <template>
   <div class="results-filter">
     <div class="results-filter_sorting">
-      <Toggle :title="this.sorting.title"
-              :options="this.sorting.options"
-              @change="this.handleToggle"
+      <Toggle title="Sort By"
+              :options="this.getSortingOptions()"
+              @change="this.onSortByChange"
       />
     </div>
   </div>
 </template>
 <script>
-import Toggle from '../common/Toggle.vue';
+import * as actions from '../../../constants/actions';
+import Toggle from '../../common/Toggle.vue';
 
 export default {
   name: 'ResultsFilter',
   components: { Toggle },
   props: ['sort'],
-  mounted() {
-    console.log('> ResultsFilter mounted', this.$props.sort);
-  },
-  watch: {
-    sort(newProp, prevProp) {
-      if (newProp.by !== prevProp.by) {
-        this.$data.sorting.options = this.getSortingOptions();
-      }
-    },
-  },
-  data() {
-    return {
-      sorting: {
-        title: 'SortBy',
-        options: this.getSortingOptions(),
-      },
-    };
-  },
   methods: {
     getSortingOptions() {
+      console.log('> sort', this.$props.sort);
       return [
         {
           value: 'year',
@@ -48,14 +32,14 @@ export default {
         },
       ];
     },
-    handleToggle(value) {
-      this.$emit('sorting', value);
+    onSortByChange(value) {
+      this.$emit('action', { type: actions.SORT_CHANGE, payload: { ...this.$props.sort, by: value } });
     },
   },
 };
 </script>
 <style scoped lang="less">
-@import "../../assets/css/variables.less";
+@import "../../../assets/css/variables.less";
 
 .results-filter {
   height: 70px;

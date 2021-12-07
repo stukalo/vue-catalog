@@ -1,7 +1,7 @@
 import Header from '../../components/common/Header.vue';
 
 export default {
-  title: 'Header',
+  title: 'common/Header',
 };
 
 export const template = () => ({

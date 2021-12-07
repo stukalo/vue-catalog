@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { action } from '@storybook/addon-actions';
-import FilmCard from '../../components/search-results/FilmCard.vue';
+import FilmCard from '../../components/search-results/components/FilmCard.vue';
 import films from '../../mock/films.json';
 
 export default {
-  title: 'FilmCard',
+  title: 'search-results/FilmCard',
 };
 
 const FilmCardTemplate = (args) => ({

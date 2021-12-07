@@ -1,7 +1,7 @@
 import Home from '../../views/Home.vue';
 
 export default {
-  title: 'Home',
+  title: 'views/Home',
 };
 
 const HomeTemplate = (args) => ({

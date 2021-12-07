@@ -12,6 +12,25 @@ const sortBy = (items, sort) => items.sort((a, b) => {
   return sort.dir === 'asc' ? -1 : 1;
 });
 
+export const getSearchFunction = (search) => {
+  if (!search.value || !search.by) {
+    return null;
+  }
+
+  switch (search.by) {
+    case 'genre':
+      return (film) => film.genres.some((genre) => genre.toLowerCase()
+        .includes(search.value.toLowerCase()));
+    case 'title':
+      return (film) => film.title.toLowerCase()
+        .includes(search.value.toLowerCase());
+    case 'id':
+      return (film) => film.id === search.value;
+    default:
+      return null;
+  }
+};
+
 export const getFilms = (query) => new Promise((resolve) => {
   try {
     const {
@@ -24,14 +43,15 @@ export const getFilms = (query) => new Promise((resolve) => {
       search = null,
     } = query;
 
-    const filtered = search
-      ? films.filter((film) => film[search.by] === search.value)
+    const searchFunction = getSearchFunction(search);
+    const filtered = (search && search.value)
+      ? films.filter(searchFunction)
       : films;
     const sorted = sortBy(filtered, sort);
     const result = sorted.slice(from, from + count);
-    debugger;
     resolve(result);
   } catch (e) {
     resolve([]);
   }
 });
+

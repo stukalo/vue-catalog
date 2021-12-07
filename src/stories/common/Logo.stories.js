@@ -1,7 +1,7 @@
 import Logo from '../../components/common/Logo.vue';
 
 export default {
-  title: 'Logo',
+  title: 'common/Logo',
 };
 
 export const template = () => ({

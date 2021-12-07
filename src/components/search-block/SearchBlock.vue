@@ -6,11 +6,15 @@
     <div class="search-block_search search">
       <h1>Find your movie</h1>
       <div class="search_search">
-        <Search/>
+        <Search :search="search"
+                @submit="this.onSubmit"
+                @valueChange="this.onSearchValueChange"
+        />
       </div>
       <div class="search_toggle">
-        <Toggle :title="this.filter.title"
-                :options="this.filter.options"
+        <Toggle title="Search by"
+                :options="this.getFilterOptions()"
+                @change="this.onSearchByChange"
         />
       </div>
     </div>
@@ -20,6 +24,7 @@
 <script>
 import Search from '../common/Search.vue';
 import Toggle from '../common/Toggle.vue';
+import * as actions from '../../constants/actions';
 
 export default {
   name: 'SearchBlock',
@@ -27,19 +32,32 @@ export default {
     Toggle,
     Search,
   },
-  data: () => ({
-    filter: {
-      title: 'Search by',
-      options: [{
+  props: ['search'],
+  methods: {
+    onSubmit() {
+      this.$emit('action', { type: actions.SEARCH_SUBMIT });
+    },
+    onSearchValueChange(value) {
+      console.log('> onSearchValueChange', value);
+      this.$emit('action', { type: actions.SEARCH_VALUE_CHANGE, payload: value });
+    },
+    onSearchByChange(value) {
+      console.log('> onSearchByChange', value);
+      this.$emit('action', { type: actions.SEARCH_BY_CHANGE, payload: value });
+    },
+    getFilterOptions() {
+      console.log('> getFilterOptions');
+      return [{
         value: 'title',
         text: 'Title',
-        active: true,
+        active: this.$props.search.by === 'title',
       }, {
         value: 'genre',
         text: 'Genre',
-      }],
+        active: this.$props.search.by === 'genre',
+      }];
     },
-  }),
+  },
 };
 </script>
 

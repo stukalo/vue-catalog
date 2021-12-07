@@ -4,7 +4,7 @@ import FilmDetails from '../../components/film-details/FilmDetails.vue';
 import films from '../../mock/films.json';
 
 export default {
-  title: 'FilmDetails',
+  title: 'film-details/FilmDetails',
 };
 
 const FilmDetailsTemplate = (args) => ({

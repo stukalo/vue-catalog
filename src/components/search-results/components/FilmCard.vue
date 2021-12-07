@@ -30,7 +30,7 @@ export default {
 };
 </script>
 <style scoped lang="less">
-@import "../../assets/css/variables.less";
+@import "../../../assets/css/variables.less";
 
 .film-card {
   width: 320px;

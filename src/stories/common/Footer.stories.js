@@ -1,7 +1,7 @@
 import Footer from '../../components/common/Footer.vue';
 
 export default {
-  title: 'Footer',
+  title: 'common/Footer',
 };
 
 export const template = () => ({

@@ -1,7 +1,7 @@
 import SearchBlock from '../../components/search-block/SearchBlock.vue';
 
 export default {
-  title: 'SearchBlock',
+  title: 'search-block/SearchBlock',
 };
 
 const SearchBlockTemplate = (args) => ({

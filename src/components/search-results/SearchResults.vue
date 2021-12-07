@@ -1,7 +1,9 @@
 <template>
   <div class="search-results">
     <div class="search-results_filter">
-      <ResultsFilter v-bind:sort="sort" @sorting="this.handleSorting"/>
+      <ResultsFilter v-bind:sort="sort"
+                     @action="this.onAction"
+      />
     </div>
     <div class="search-results_cards">
       <div class="search-results_empty"
@@ -22,9 +24,8 @@
 </template>
 
 <script>
-import FilmCard from './FilmCard.vue';
-import ResultsFilter from './ResultsFilter.vue';
-import { getFilms } from '../../mock/api';
+import FilmCard from './components/FilmCard.vue';
+import ResultsFilter from './components/ResultsFilter.vue';
 
 export default {
   name: 'SearchResults',
@@ -32,68 +33,11 @@ export default {
     ResultsFilter,
     FilmCard,
   },
-  data() {
-    return {
-      isLoading: false,
-      hasNext: true,
-      results: [],
-      sort: { by: 'year', dir: 'desc' },
-    };
-  },
-  mounted() {
-    console.log('> mounted', this.sort);
-    window.addEventListener('scroll', this.handleScroll);
-    this.getInitialResults();
-  },
-  unmounted() {
-    console.log('> unmounted');
-    window.removeEventListener('scroll', this.handleScroll);
-  },
+  props: ['results', 'sort'],
   methods: {
-    async handleSorting(value) {
-      console.log('> handleSorting', value);
-      const sort = { by: value, dir: 'desc' };
-      this.sort = sort;
-      this.results = await getFilms({ sort });
-    },
-    async getInitialResults() {
-      console.log('> getInitialResults');
-      const { sort } = this;
-      this.results = await getFilms({ sort });
-    },
-    async getNextResults() {
-      console.log('> getNextResults');
-      const { sort } = this;
-      this.isLoading = true;
-
-      const results = await getFilms({
-        from: this.results.length,
-        sort,
-      });
-
-      if (results.length) {
-        this.results = [...this.results, ...results];
-      } else {
-        this.hasNext = false;
-      }
-
-      this.isLoading = false;
-    },
-    handleScroll() {
-      if (this.isLoading || !this.hasNext) {
-        return;
-      }
-
-      const {
-        scrollTop,
-        offsetHeight,
-      } = document.documentElement;
-
-      const bottomOfWindow = scrollTop + window.innerHeight >= offsetHeight;
-
-      if (bottomOfWindow) {
-        this.getNextResults();
-      }
+    onAction(data) {
+      this.$emit('action', data);
+      console.log('> onAction', data);
     },
   },
 };

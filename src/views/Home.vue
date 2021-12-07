@@ -4,8 +4,15 @@
       <Header/>
     </header>
     <main class="home_main">
-      <SearchBlock/>
-      <SearchResults :results="this.films"/>
+      <SearchBlock
+        @action="this.onAction"
+        :search="search"
+      />
+      <SearchResults
+        @action="this.onAction"
+        :sort="sort"
+        :results="results"
+      />
     </main>
     <footer class="home_footer">
       <Footer/>
@@ -21,7 +28,6 @@ h1 {
 <script>
 import SearchBlock from '../components/search-block/SearchBlock.vue';
 import SearchResults from '../components/search-results/SearchResults.vue';
-import films from '../mock/films.json';
 import Header from '../components/common/Header.vue';
 import Footer from '../components/common/Footer.vue';
 
@@ -33,9 +39,12 @@ export default {
     SearchBlock,
     SearchResults,
   },
-  data: () => ({
-    films: films.slice(0, 9),
-  }),
+  props: ['results', 'sort', 'search'],
+  methods: {
+    onAction(data) {
+      this.$emit('action', data);
+    },
+  },
 };
 </script>
 <style scoped lang="less">

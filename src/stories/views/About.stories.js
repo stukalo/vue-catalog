@@ -1,7 +1,7 @@
 import About from '../../views/About.vue';
 
 export default {
-  title: 'About',
+  title: 'views/About',
 };
 
 const AboutTemplate = (args) => ({

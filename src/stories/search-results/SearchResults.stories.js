@@ -2,7 +2,7 @@ import SearchResults from '../../components/search-results/SearchResults.vue';
 import films from '../../mock/films.json';
 
 export default {
-  title: 'SearchResults',
+  title: 'search-results/SearchResults',
 };
 
 const SearchResultsTemplate = (args) => ({

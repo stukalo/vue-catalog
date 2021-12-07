@@ -38,31 +38,9 @@
 </template>
 
 <script>
-import { getFilms } from '../../mock/api';
-
 export default {
   name: 'FilmDetails',
-  props: ['id'],
-  data() {
-    return {
-      film: null,
-    };
-  },
-  beforeMount() {
-    this.getFilm();
-  },
-  updated() {
-    if (this.film?.id !== this.id) {
-      this.getFilm();
-    }
-  },
-  methods: {
-    getFilm() {
-      getFilms({ search: { by: 'id', value: Number(this.id) } }).then((films) => {
-        this.film = films[0];
-      });
-    },
-  },
+  props: ['film'],
 };
 </script>
 

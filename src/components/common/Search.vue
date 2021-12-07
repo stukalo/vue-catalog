@@ -1,13 +1,20 @@
 <template>
   <div class='search'>
-    <input class='search_input'
-           type="text"
-           ref="search-input"
-           autocomplete="off"
-           spellcheck="false"
-           placeholder="Search"
+    <input
+      class='search_input'
+      type="text"
+      ref="search-input"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="Search"
+      @input="this.onInput"
     />
-    <Button class='search_button' @click="this.onSubmit()">Search</Button>
+    <Button
+      class='search_button'
+      @click="this.onSubmit"
+    >
+      Search
+    </Button>
   </div>
 </template>
 
@@ -21,8 +28,11 @@ export default {
   },
   methods: {
     onSubmit() {
-      const { value } = this.$refs['search-input'];
-      this.$emit('submit', value);
+      this.$emit('submit');
+    },
+    onInput(evt) {
+      console.log('> onInput', evt);
+      this.$emit('valueChange', evt.target.value);
     },
   },
 };

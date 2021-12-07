@@ -4,8 +4,12 @@
       <Header/>
     </header>
     <main class="about_main">
-      <FilmDetails :id="id"/>
-      <SearchResults/>
+      <FilmDetails :film="film"/>
+      <SearchResults
+        @action="this.onAction"
+        :sort="sort"
+        :results="results"
+      />
     </main>
     <footer class="about_footer">
       <Footer/>
@@ -23,6 +27,7 @@ import SearchResults from '../components/search-results/SearchResults.vue';
 import Header from '../components/common/Header.vue';
 import Footer from '../components/common/Footer.vue';
 import FilmDetails from '../components/film-details/FilmDetails.vue';
+import * as actions from '../constants/actions';
 
 export default {
   name: 'About',
@@ -32,17 +37,23 @@ export default {
     Header,
     SearchResults,
   },
+  props: ['film', 'sort', 'results'],
   watch: {
     $route() {
-      const { id } = this.$route.params;
-      this.id = id;
+      this.selectedChange();
     },
   },
-  data() {
-    const { id } = this.$route.params;
-    return {
-      id,
-    };
+  beforeMount() {
+    this.selectedChange();
+  },
+  methods: {
+    onAction(data) {
+      this.$emit('action', data);
+    },
+    selectedChange() {
+      const { id } = this.$route.params;
+      this.$emit('action', { type: actions.SELECTED_CHANGE, payload: id });
+    }
   },
 };
 </script>
@@ -51,7 +62,7 @@ export default {
 @import (once) "../assets/css/variables.less";
 
 .about {
-  position: relative;;
+  position: relative;
   min-width: @minPageWidth;
 }
 
