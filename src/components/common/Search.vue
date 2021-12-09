@@ -8,6 +8,7 @@
       spellcheck="false"
       placeholder="Search"
       @input="this.onInput"
+      :value="search.value"
     />
     <Button
       class='search_button'
@@ -26,12 +27,12 @@ export default {
   components: {
     Button,
   },
+  props: ['search'],
   methods: {
     onSubmit() {
       this.$emit('submit');
     },
     onInput(evt) {
-      console.log('> onInput', evt);
       this.$emit('valueChange', evt.target.value);
     },
   },

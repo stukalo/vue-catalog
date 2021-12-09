@@ -22,9 +22,6 @@
 export default {
   name: 'Toggle',
   props: ['title', 'options'],
-  mounted() {
-    console.log('> options', this.options);
-  },
   methods: {
     onChange(value) {
       this.$emit('change', value);

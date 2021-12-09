@@ -37,7 +37,6 @@ export default {
   methods: {
     onAction(data) {
       this.$emit('action', data);
-      console.log('> onAction', data);
     },
   },
 };
@@ -72,5 +71,9 @@ export default {
 
 .search-results_card {
   margin: 20px;
+
+  a {
+    text-decoration: none;
+  }
 }
 </style>

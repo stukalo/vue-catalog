@@ -18,7 +18,6 @@ export default {
   props: ['sort'],
   methods: {
     getSortingOptions() {
-      console.log('> sort', this.$props.sort);
       return [
         {
           value: 'year',

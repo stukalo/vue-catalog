@@ -15,4 +15,8 @@ const SearchBlockTemplate = (args) => ({
 
 export const template = SearchBlockTemplate.bind({});
 template.args = {
+  search: {
+    by: 'title',
+    value: 'Kill Bill',
+  },
 };

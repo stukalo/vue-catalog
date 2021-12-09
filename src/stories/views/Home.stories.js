@@ -1,4 +1,5 @@
 import Home from '../../views/Home.vue';
+import films from '../../mock/films.json';
 
 export default {
   title: 'views/Home',
@@ -15,4 +16,7 @@ const HomeTemplate = (args) => ({
 
 export const template = HomeTemplate.bind({});
 template.args = {
+  search: { by: 'genre', value: 'Comedy' },
+  sort: { by: 'year' },
+  results: films.slice(0, 5),
 };

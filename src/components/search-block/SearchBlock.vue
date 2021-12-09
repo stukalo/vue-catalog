@@ -38,15 +38,12 @@ export default {
       this.$emit('action', { type: actions.SEARCH_SUBMIT });
     },
     onSearchValueChange(value) {
-      console.log('> onSearchValueChange', value);
       this.$emit('action', { type: actions.SEARCH_VALUE_CHANGE, payload: value });
     },
     onSearchByChange(value) {
-      console.log('> onSearchByChange', value);
       this.$emit('action', { type: actions.SEARCH_BY_CHANGE, payload: value });
     },
     getFilterOptions() {
-      console.log('> getFilterOptions');
       return [{
         value: 'title',
         text: 'Title',

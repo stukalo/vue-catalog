@@ -17,4 +17,5 @@ const SearchResultsTemplate = (args) => ({
 export const template = SearchResultsTemplate.bind({});
 template.args = {
   results: films.slice(0, 9),
+  sort: { by: 'rating' },
 };

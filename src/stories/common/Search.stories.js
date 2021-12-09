@@ -6,11 +6,22 @@ export default {
   title: 'common/Search',
 };
 
-export const template = () => ({
+const SearchTemplate = (args) => ({
   components: { Search },
-  template: '<Search @submit="onSubmit" @valueChange="onValueChange"/>',
+  setup() {
+    return { args };
+  },
+  template: '<Search v-bind="args" @submit="onSubmit" @valueChange="onValueChange"/>',
   methods: {
     onSubmit: action('submit'),
     onValueChange: action('valueChange'),
   },
 });
+
+export const template = SearchTemplate.bind({});
+template.args = {
+  search: {
+    by: 'genre',
+    value: 'Thriller',
+  },
+};

@@ -30,18 +30,14 @@ export default {
     };
   },
   mounted() {
-    console.log('> search', this.search);
-    console.log('> mounted', this.sort);
     window.addEventListener('scroll', this.handleScroll);
     this.getInitialResults();
   },
   unmounted() {
-    console.log('> unmounted');
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
     onAction(action) {
-      console.log('> onAction', action);
       switch (action.type) {
         case actions.SEARCH_SUBMIT: {
           this.getInitialResults();
@@ -72,18 +68,15 @@ export default {
       }
     },
     handleSubmit(search) {
-      console.log('> handleSubmit', search);
       if (!deepEqual(search, this.search)) {
         this.search = search;
       }
     },
     async getInitialResults() {
-      console.log('> getInitialResults');
       const { sort, search } = this;
       this.results = await getFilms({ sort, search });
     },
     async getNextResults() {
-      console.log('> getNextResults');
       const { sort, search } = this;
       this.isLoading = true;
 
@@ -128,6 +121,10 @@ export default {
 <style lang="less">
 @import (once) "./assets/css/reset.less";
 @import (reference) "./assets/css/variables.less";
+
+body {
+  background-color: @primaryBackground;
+}
 
 #app {
   min-width: @minPageWidth;

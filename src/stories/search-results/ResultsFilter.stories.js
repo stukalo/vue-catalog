@@ -17,4 +17,7 @@ const ResultsFilterTemplate = (args) => ({
 
 export const template = ResultsFilterTemplate.bind({});
 template.args = {
+  sort: {
+    by: 'year',
+  },
 };

@@ -5,10 +5,24 @@ import Button from '../../components/common/Button.vue';
 
 export default {
   title: 'common/Button',
+  argTypes: {
+    slot: { control: 'text' },
+  },
 };
 
-export const template = () => ({
+const ButtonTemplate = (args, { argTypes }) => ({
   components: { Button },
-  template: '<Button @click="action">Button</Button>',
+  data() {
+    return {
+      slot: args.slot,
+    };
+  },
+  template: '<Button @click="action">{{slot}}</Button>',
   methods: { action: action('clicked') },
+  props: Object.keys(argTypes),
 });
+
+export const template = ButtonTemplate.bind({});
+template.args = {
+  slot: 'button',
+};
