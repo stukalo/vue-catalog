@@ -74,7 +74,19 @@ export default {
     },
     async getInitialResults() {
       const { sort, search } = this;
-      this.results = await getFilms({ sort, search });
+      this.results = [];
+      this.hasNext = true;
+      this.isLoading = true;
+
+      const results = await getFilms({ sort, search });
+
+      if (results.length) {
+        this.results = results;
+      } else {
+        this.hasNext = false;
+      }
+
+      this.isLoading = false;
     },
     async getNextResults() {
       const { sort, search } = this;
