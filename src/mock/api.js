@@ -1,3 +1,5 @@
+// https://my-json-server.typicode.com/stukalo/movies/films/348350
+
 import films from './films.json';
 
 const sortBy = (items, sort) => items.sort((a, b) => {
@@ -54,4 +56,3 @@ export const getFilms = (query) => new Promise((resolve) => {
     resolve([]);
   }
 });
-

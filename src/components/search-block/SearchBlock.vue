@@ -25,6 +25,7 @@
 import Search from '../common/Search.vue';
 import Toggle from '../common/Toggle.vue';
 import * as actions from '../../constants/actions';
+import {mapState, mapActions} from 'vuex';
 
 export default {
   name: 'SearchBlock',
@@ -32,26 +33,24 @@ export default {
     Toggle,
     Search,
   },
-  props: ['search'],
+  computed: mapState({
+    search: state => state.search,
+  }),
   methods: {
-    onSubmit() {
-      this.$emit('action', { type: actions.SEARCH_SUBMIT });
-    },
-    onSearchValueChange(value) {
-      this.$emit('action', { type: actions.SEARCH_VALUE_CHANGE, payload: value });
-    },
-    onSearchByChange(value) {
-      this.$emit('action', { type: actions.SEARCH_BY_CHANGE, payload: value });
-    },
+    ...mapActions({
+      onSubmit: actions.SEARCH_SUBMIT,
+      onSearchByChange: actions.SEARCH_BY_CHANGE,
+      onSearchValueChange: actions.SEARCH_VALUE_CHANGE,
+    }),
     getFilterOptions() {
       return [{
         value: 'title',
         text: 'Title',
-        active: this.$props.search.by === 'title',
+        active: this.search.by === 'title',
       }, {
         value: 'genre',
         text: 'Genre',
-        active: this.$props.search.by === 'genre',
+        active: this.search.by === 'genre',
       }];
     },
   },

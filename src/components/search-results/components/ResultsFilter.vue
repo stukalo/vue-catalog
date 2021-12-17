@@ -11,28 +11,31 @@
 <script>
 import * as actions from '../../../constants/actions';
 import Toggle from '../../common/Toggle.vue';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'ResultsFilter',
   components: { Toggle },
-  props: ['sort'],
+  computed: mapState({
+    sort: state => state.sort,
+  }),
   methods: {
+    ...mapActions({
+      onSortByChange: actions.SORT_BY_CHANGE,
+    }),
     getSortingOptions() {
       return [
         {
           value: 'year',
           text: 'Release date',
-          active: this.$props.sort?.by === 'year',
+          active: this.sort?.by === 'year',
         },
         {
           value: 'rating',
           text: 'Rating',
-          active: this.$props.sort?.by === 'rating',
+          active: this.sort?.by === 'rating',
         },
       ];
-    },
-    onSortByChange(value) {
-      this.$emit('action', { type: actions.SORT_CHANGE, payload: { ...this.$props.sort, by: value } });
     },
   },
 };

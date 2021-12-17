@@ -1,18 +1,16 @@
 <template>
   <div class="search-results">
     <div class="search-results_filter">
-      <ResultsFilter v-bind:sort="sort"
-                     @action="this.onAction"
-      />
+      <ResultsFilter v-bind:sort="sort"/>
     </div>
     <div class="search-results_cards">
       <div class="search-results_empty"
-           v-if="!results.length"
+           v-if="!this.results.length"
       >
         <span>No films found</span>
       </div>
       <div class="search-results_card"
-           v-for="item in results"
+           v-for="item in this.results"
            :key="item.id"
       >
         <router-link :to="{path: `/about/${item.id}`}">
@@ -24,8 +22,10 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import FilmCard from './components/FilmCard.vue';
 import ResultsFilter from './components/ResultsFilter.vue';
+import * as actions from '../../constants/actions';
 
 export default {
   name: 'SearchResults',
@@ -33,10 +33,39 @@ export default {
     ResultsFilter,
     FilmCard,
   },
-  props: ['results', 'sort'],
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+    this.getInitialResults();
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  computed: mapState({
+    hasNext: state => state.hasNext,
+    isLoading: state => state.isLoading,
+    sort: (state) => state.sort,
+    results: (state) => state.results,
+  }),
   methods: {
-    onAction(data) {
-      this.$emit('action', data);
+    ...mapActions({
+      getInitialResults: actions.GET_INITIAL_SEARCH_RESULTS,
+      getNextResults: actions.GET_NEXT_SEARCH_RESULTS,
+    }),
+    handleScroll() {
+      if (this.isLoading || !this.hasNext) {
+        return;
+      }
+
+      const {
+        scrollTop,
+        offsetHeight,
+      } = document.documentElement;
+
+      const bottomOfWindow = scrollTop + window.innerHeight >= offsetHeight;
+
+      if (bottomOfWindow) {
+        this.getNextResults();
+      }
     },
   },
 };

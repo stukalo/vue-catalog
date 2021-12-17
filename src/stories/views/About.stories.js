@@ -1,6 +1,6 @@
+import vueRouter from 'storybook-vue3-router';
 import About from '../../views/About.vue';
 import films from '../../mock/films.json';
-import vueRouter from 'storybook-vue3-router';
 
 export default {
   title: 'views/About',

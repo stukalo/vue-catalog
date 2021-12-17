@@ -11,6 +11,7 @@ module.exports = {
     parser: 'babel-eslint',
   },
   rules: {
+    'arrow-parens': 'off',
     'prefer-destructuring': 'off',
     'no-param-reassign': 'off',
     'no-underscore-dangle': 'off',

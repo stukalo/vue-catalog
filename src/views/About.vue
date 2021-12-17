@@ -53,7 +53,7 @@ export default {
     selectedChange() {
       const { id } = this.$route.params;
       this.$emit('action', { type: actions.SELECTED_CHANGE, payload: id });
-    }
+    },
   },
 };
 </script>

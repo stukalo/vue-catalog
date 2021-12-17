@@ -38,9 +38,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'FilmDetails',
-  props: ['film'],
+  computed: mapState({
+    film: state => state.film,
+  }),
 };
 </script>
 
