@@ -9,14 +9,17 @@ const withVueRouter = function withVueRouter() {
     name: 'withStore',
     parameterName: 'withStore',
     wrapper: (storyFn, context) => {
-      _vue.app.use(store);
+      const existingStore = _vue.app.config.globalProperties.$store;
+
+      if (!existingStore) {
+        _vue.app.use(store);
+      } else {
+        existingStore.hotUpdate(store);
+      }
+
       return storyFn(context);
     }
   });
 };
-
-if (module && module.hot && module.hot.decline) {
-  module.hot.decline();
-}
 
 export default withVueRouter;
