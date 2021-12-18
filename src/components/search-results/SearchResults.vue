@@ -13,7 +13,7 @@
            v-for="item in this.results"
            :key="item.id"
       >
-        <router-link :to="{path: `/about/${item.id}`}">
+        <router-link :to="{path: `/about/${item.id}`}" target= '_blank'>
           <FilmCard :film="item"/>
         </router-link>
       </div>
