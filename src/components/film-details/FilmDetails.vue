@@ -43,7 +43,7 @@ import { mapState } from 'vuex';
 export default {
   name: 'FilmDetails',
   computed: mapState({
-    film: state => state.film,
+    film: state => state.film
   }),
 };
 </script>

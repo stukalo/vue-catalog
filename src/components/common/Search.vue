@@ -11,6 +11,7 @@
       :value="search.value"
     />
     <Button
+      type="button"
       class='search_button'
       @click="this.onSubmit"
     >

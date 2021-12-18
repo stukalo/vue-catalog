@@ -1,22 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { action } from '@storybook/addon-actions';
 import FilmDetails from '../../components/film-details/FilmDetails.vue';
 import films from '../../mock/films.json';
+import withStore from '../../../config/storybook/decorators/withStore';
+import { createStore } from 'vuex';
+
+const store = createStore({
+  state: {
+    film: films[0],
+  },
+});
 
 export default {
   title: 'film-details/FilmDetails',
+  decorators: [withStore(store)]
 };
 
 const FilmDetailsTemplate = (args) => ({
   components: { FilmDetails },
-  setup() {
-    return { args };
-  },
-  template: '<FilmDetails v-bind="args" @click="action"/>',
-  methods: { action: action('click') },
+  template: '<FilmDetails/>',
 });
 
-export const template = FilmDetailsTemplate.bind({});
-template.args = {
-  film: films[0],
-};
+export const template = FilmDetailsTemplate.bind({
+});
