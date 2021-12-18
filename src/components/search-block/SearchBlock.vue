@@ -92,4 +92,18 @@ export default {
 .search_toggle {
   margin-top: 18px;
 }
+
+@media only screen and (max-width: 600px) {
+  .search-block {
+    height: auto;
+  }
+
+  .search-block_search {
+    padding: 120px 10% 50px 10%;
+  }
+
+  .search_toggle {
+    margin-top: 28px;
+  }
+}
 </style>

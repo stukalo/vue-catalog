@@ -45,7 +45,6 @@ export default {
 @import (reference) '../../assets/css/reset.less';
 
 .search {
-  min-width: 600px;
   display: flex;
   .fontMixin(25px);
 }
@@ -54,7 +53,7 @@ export default {
   flex: 1;
   border: none;
   box-sizing: border-box;
-  height: 60px;
+  min-height: 60px;
   padding: 0 15px;
   margin: 0 14px 0 0;
   color: @primaryText;
@@ -64,6 +63,16 @@ export default {
 
   &:focus-visible {
     outline: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .search {
+    flex-direction: column;
+  }
+
+  .search_input {
+    margin: 0 0 10px 0;
   }
 }
 

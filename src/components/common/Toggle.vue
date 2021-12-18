@@ -69,4 +69,15 @@ export default {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .toggle {
+    flex-direction: column;
+    width: auto;
+  }
+
+  .toggle_title {
+    margin: 0 0 15px 0;
+  }
+}
+
 </style>

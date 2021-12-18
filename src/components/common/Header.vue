@@ -51,4 +51,5 @@ export default {
   mask-image: url('../../assets/img/search.svg');
   cursor: pointer;
 }
+
 </style>

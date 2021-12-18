@@ -105,4 +105,16 @@ export default {
     text-decoration: none;
   }
 }
+
+
+@media only screen and (max-width: 600px) {
+  .results-filter {
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .search-results_cards {
+    padding: 0;
+  }
+}
 </style>
