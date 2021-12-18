@@ -3,7 +3,7 @@ import { createStore } from 'vuex';
 const _vue = require("@storybook/vue3");
 const _addons = require("@storybook/addons");
 
-const withVueRouter = function withVueRouter() {
+const withVueStore = function withVueStore() {
   const store = arguments?.[0] || createStore({ state: {} });
   return _addons.makeDecorator({
     name: 'withStore',
@@ -22,4 +22,4 @@ const withVueRouter = function withVueRouter() {
   });
 };
 
-export default withVueRouter;
+export default withVueStore;
