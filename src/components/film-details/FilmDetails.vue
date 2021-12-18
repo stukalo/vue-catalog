@@ -151,4 +151,32 @@ export default {
   font-size: 18px;
   line-height: 1.4;
 }
+
+@media only screen and (max-width: 600px) {
+  .film-details {
+    padding: 80px 10% 50px 10%;
+  }
+
+  .film {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info {
+    padding: 20px 0 0 0;
+  }
+
+  .film_poster,
+  .info_plot,
+  .info_stats,
+  .title-block,
+  .info_genre {
+    display: flex;
+    justify-content: center;
+  }
+
+  .info_plot p {
+    text-align: center;
+  }
+}
 </style>

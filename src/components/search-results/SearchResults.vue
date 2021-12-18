@@ -94,7 +94,7 @@ export default {
   padding: 40px 30px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   flex: 1;
 }
 
