@@ -46,7 +46,8 @@ export default {
   name: 'FilmDetails',
   beforeMount() {
     if (!this.film) {
-      this.selectedChange(DEFAULT_SELECTED_FILM_ID);
+      const id = this.$route?.params.id || DEFAULT_SELECTED_FILM_ID;
+      this.selectedChange(id);
     }
   },
   computed: mapState({
