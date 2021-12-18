@@ -12,8 +12,9 @@
       <div class="search-results_card"
            v-for="item in this.results"
            :key="item.id"
+           @click.native="this.scrollToTop()"
       >
-        <router-link :to="{path: `/about/${item.id}`}" target= '_blank'>
+        <router-link :to="{path: `/about/${item.id}`}">
           <FilmCard :film="item"/>
         </router-link>
       </div>
@@ -67,6 +68,9 @@ export default {
         this.getNextResults();
       }
     },
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    }
   },
 };
 </script>
