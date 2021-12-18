@@ -15,4 +15,8 @@ const withVueRouter = function withVueRouter() {
   });
 };
 
+if (module && module.hot && module.hot.decline) {
+  module.hot.decline();
+}
+
 export default withVueRouter;

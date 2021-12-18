@@ -1,32 +1,13 @@
 import SearchResults from '../../components/search-results/SearchResults.vue';
-import films from '../../mock/films.json';
 import withStore from '../../../config/storybook/decorators/withStore';
-import { createStore } from 'vuex';
-import { createActionHandlers } from '../../../config/storybook/helpers/actionsHelper';
-import {
-  GET_INITIAL_SEARCH_RESULTS,
-  GET_NEXT_SEARCH_RESULTS,
-  SORT_BY_CHANGE
-} from '../../constants/actions';
 
-const store = createStore({
-  state: {
-    hasNext: false,
-    isLoading: false,
-    sort: {
-      by: 'year',
-    },
-    results: films.slice(0, 9),
-  },
-  actions: createActionHandlers({
-    actions: [GET_NEXT_SEARCH_RESULTS, SORT_BY_CHANGE, GET_INITIAL_SEARCH_RESULTS],
-    handler: console.info,
-  }),
-});
+import store from '../../store';
+import vueRouter from 'storybook-vue3-router';
+import { routes } from '../../router';
 
 export default {
   title: 'search-results/SearchResults',
-  decorators: [withStore(store)]
+  decorators: [withStore(store), vueRouter(routes, { initialRoute: '/' })],
 };
 
 const SearchResultsTemplate = () => ({

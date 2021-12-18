@@ -1,7 +1,7 @@
 <template>
   <div class="search-results">
     <div class="search-results_filter">
-      <ResultsFilter v-bind:sort="sort"/>
+      <ResultsFilter :sort="sort"/>
     </div>
     <div class="search-results_cards">
       <div class="search-results_empty"
@@ -43,8 +43,8 @@ export default {
   computed: mapState({
     hasNext: state => state.hasNext,
     isLoading: state => state.isLoading,
-    sort: (state) => state.sort,
-    results: (state) => state.results,
+    sort: state => state.sort,
+    results: state => state.results || [],
   }),
   methods: {
     ...mapActions({

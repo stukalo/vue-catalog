@@ -1,5 +1,5 @@
 <template>
-  <div class="film-card" @click="this.onCardClick(film.id)">
+  <div class="film-card">
     <div class="film-card_poster">
       <img :src="film.posterUrl"/>
     </div>
@@ -22,11 +22,6 @@
 export default {
   name: 'FilmCard',
   props: ['film'],
-  methods: {
-    onCardClick(id) {
-      this.$emit('click', id);
-    },
-  },
 };
 </script>
 <style scoped lang="less">

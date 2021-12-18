@@ -1,24 +1,17 @@
 import vueRouter from 'storybook-vue3-router';
 import About from '../../views/About.vue';
-import films from '../../mock/films.json';
+import { routes } from '../../router';
+import withStore from '../../../config/storybook/decorators/withStore';
+import store from '../../store';
 
 export default {
   title: 'views/About',
-  decorators: [vueRouter([{ path: '/about/:id', name: 'about' }], { initialRoute: '/about/2' })],
+  decorators: [withStore(store), vueRouter(routes, { initialRoute: '/about/2' })],
 };
 
-const AboutTemplate = (args) => ({
+const AboutTemplate = () => ({
   components: { About },
-  setup() {
-    return { args };
-  },
-  template: '<About v-bind="args"/>',
-  methods: {},
+  template: '<About/>',
 });
 
 export const template = AboutTemplate.bind({});
-template.args = {
-  film: films[0],
-  sort: { by: 'year' },
-  results: films.slice(0, 5),
-};

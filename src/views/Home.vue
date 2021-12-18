@@ -4,15 +4,8 @@
       <Header/>
     </header>
     <main class="home_main">
-      <SearchBlock
-        @action="this.onAction"
-        :search="search"
-      />
-      <SearchResults
-        @action="this.onAction"
-        :sort="sort"
-        :results="results"
-      />
+      <SearchBlock />
+      <SearchResults/>
     </main>
     <footer class="home_footer">
       <Footer/>
@@ -38,12 +31,6 @@ export default {
     Header,
     SearchBlock,
     SearchResults,
-  },
-  props: ['results', 'sort', 'search'],
-  methods: {
-    onAction(data) {
-      this.$emit('action', data);
-    },
   },
 };
 </script>

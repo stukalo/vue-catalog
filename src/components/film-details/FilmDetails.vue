@@ -38,12 +38,22 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
+import * as actions from '../../constants/actions';
+import { DEFAULT_SELECTED_FILM_ID } from '../../constants/common';
 
 export default {
   name: 'FilmDetails',
+  beforeMount() {
+    if (!this.film) {
+      this.selectedChange(DEFAULT_SELECTED_FILM_ID);
+    }
+  },
   computed: mapState({
     film: state => state.film
+  }),
+  methods: mapActions({
+    selectedChange: actions.SELECTED_CHANGE,
   }),
 };
 </script>

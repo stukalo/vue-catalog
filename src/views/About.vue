@@ -4,12 +4,8 @@
       <Header/>
     </header>
     <main class="about_main">
-      <FilmDetails :film="film"/>
-      <SearchResults
-        @action="this.onAction"
-        :sort="sort"
-        :results="results"
-      />
+      <FilmDetails/>
+      <SearchResults/>
     </main>
     <footer class="about_footer">
       <Footer/>
@@ -28,6 +24,7 @@ import Header from '../components/common/Header.vue';
 import Footer from '../components/common/Footer.vue';
 import FilmDetails from '../components/film-details/FilmDetails.vue';
 import * as actions from '../constants/actions';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'About',
@@ -37,23 +34,15 @@ export default {
     Header,
     SearchResults,
   },
-  props: ['film', 'sort', 'results'],
   watch: {
     $route() {
-      this.selectedChange();
-    },
-  },
-  beforeMount() {
-    this.selectedChange();
+      this.selectedChange(this.$route.params.id);
+    }
   },
   methods: {
-    onAction(data) {
-      this.$emit('action', data);
-    },
-    selectedChange() {
-      const { id } = this.$route.params;
-      this.$emit('action', { type: actions.SELECTED_CHANGE, payload: id });
-    },
+    ...mapActions({
+      selectedChange: actions.SELECTED_CHANGE,
+    }),
   },
 };
 </script>
