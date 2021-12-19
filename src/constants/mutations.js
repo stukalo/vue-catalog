@@ -1,7 +1,0 @@
-export const SET_SORT_BY = 'SET_SORT_BY';
-export const SET_HAS_NEXT = 'SET_HAS_NEXT';
-export const SET_SEARCH_BY = 'SET_SEARCH_BY';
-export const SET_IS_LOADING = 'SET_IS_LOADING';
-export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
-export const SET_SELECTED_FILM = 'SET_SELECTED_FILM';
-export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';
