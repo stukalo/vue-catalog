@@ -23,7 +23,7 @@ import SearchResults from '../components/search-results/SearchResults.vue';
 import Header from '../components/common/Header.vue';
 import Footer from '../components/common/Footer.vue';
 import FilmDetails from '../components/film-details/FilmDetails.vue';
-import * as actions from '../constants/actions';
+import * as actions from '../store/actions';
 import { mapActions, mapState } from 'vuex';
 
 export default {

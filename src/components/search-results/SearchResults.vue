@@ -26,7 +26,7 @@
 import { mapState, mapActions } from 'vuex';
 import FilmCard from './components/FilmCard.vue';
 import ResultsFilter from './components/ResultsFilter.vue';
-import * as actions from '../../constants/actions';
+import * as actions from '../../store/actions';
 
 export default {
   name: 'SearchResults',

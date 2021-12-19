@@ -24,7 +24,7 @@
 <script>
 import Search from '../common/Search.vue';
 import Toggle from '../common/Toggle.vue';
-import * as actions from '../../constants/actions';
+import * as actions from '../../store/actions';
 import {mapState, mapActions} from 'vuex';
 
 export default {

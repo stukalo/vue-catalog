@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import * as actions from '../../../constants/actions';
+import * as actions from '../../../store/actions';
 import Toggle from '../../common/Toggle.vue';
 import { mapState, mapActions } from 'vuex';
 

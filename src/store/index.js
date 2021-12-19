@@ -1,6 +1,5 @@
 import { createStore } from 'vuex';
-import * as actions from '../constants/actions';
-import * as mutations from '../constants/mutations';
+import * as actions from './actions';
 import { getFilms } from '../mock/api';
 
 export default createStore({
@@ -18,55 +17,32 @@ export default createStore({
       value: '',
     },
   },
-  mutations: {
-    [mutations.SET_IS_LOADING]: (state, isLoading) => {
-      state.isLoading = isLoading;
-    },
-    [mutations.SET_HAS_NEXT]: (state, hasNext) => {
-      state.hasNext = hasNext;
-    },
-    [mutations.SET_SORT_BY]: (state, by) => {
-      state.sort.by = by;
-    },
-    [mutations.SET_SEARCH_BY]: (state, by) => {
-      state.search.by = by;
-    },
-    [mutations.SET_SEARCH_VALUE]: (state, value) => {
-      state.search.value = value;
-    },
-    [mutations.SET_SELECTED_FILM]: (state, film) => {
-      state.film = film;
-    },
-    [mutations.SET_SEARCH_RESULTS]: (state, results) => {
-      state.results = results;
-    },
-  },
   actions: {
     [actions.SEARCH_SUBMIT]: ({ dispatch }) => {
       dispatch(actions.GET_INITIAL_SEARCH_RESULTS);
     },
-    [actions.SORT_BY_CHANGE]: ({ commit, dispatch }, value) => {
-      commit(mutations.SET_SORT_BY, value);
+    [actions.SORT_BY_CHANGE]: ({ state, dispatch }, value) => {
+      state.sort.by = value;
       dispatch(actions.GET_INITIAL_SEARCH_RESULTS);
     },
-    [actions.SEARCH_BY_CHANGE]: ({ commit, dispatch }, value) => {
-      commit(mutations.SET_SEARCH_BY, value);
+    [actions.SEARCH_BY_CHANGE]: ({ state, dispatch }, value) => {
+      state.search.by = value;
       dispatch(actions.GET_INITIAL_SEARCH_RESULTS);
     },
-    [actions.SEARCH_VALUE_CHANGE]: ({ commit, dispatch }, value) => {
-      commit(mutations.SET_SEARCH_VALUE, value);
+    [actions.SEARCH_VALUE_CHANGE]: ({ state, dispatch }, value) => {
+      state.search.value = value;
     },
-    [actions.SELECTED_CHANGE]: ({ commit }, id) => {
+    [actions.SELECTED_CHANGE]: ({ state }, id) => {
       getFilms({ search: { by: 'id', value: Number(id) } }).then((films) => {
-        commit(mutations.SET_SELECTED_FILM, films[0] || null);
+        state.film = films[0] || null;
       });
     },
-    [actions.GET_INITIAL_SEARCH_RESULTS]: async ({ commit, state }) => {
+    [actions.GET_INITIAL_SEARCH_RESULTS]: async ({ state }) => {
       const { sort, search } = state;
 
-      commit(mutations.SET_SEARCH_RESULTS, []);
-      commit(mutations.SET_HAS_NEXT, true);
-      commit(mutations.SET_IS_LOADING, true);
+      state.results = [];
+      state.hasNext = true;
+      state.isLoading = true;
 
       const results = await getFilms({
         sort,
@@ -74,16 +50,16 @@ export default createStore({
       });
 
       if (results.length) {
-        commit(mutations.SET_SEARCH_RESULTS, results);
+        state.results = results;
       } else {
-        commit(mutations.SET_HAS_NEXT, false);
+        state.hasNext = false
       }
 
-      commit(mutations.SET_IS_LOADING, false);
+      state.isLoading = false;
     },
-    [actions.GET_NEXT_SEARCH_RESULTS]: async ({ commit, state }) => {
+    [actions.GET_NEXT_SEARCH_RESULTS]: async ({ state }) => {
       const { sort, search, results } = state;
-      commit(mutations.SET_IS_LOADING, true);
+      state.isLoading = true;
 
       const nextResults = await getFilms({
         from: results.length,
@@ -92,12 +68,12 @@ export default createStore({
       });
 
       if (results.length) {
-        commit(mutations.SET_SEARCH_RESULTS, [...results, ...nextResults]);
+        state.results = [...results, ...nextResults];
       } else {
-        commit(mutations.SET_HAS_NEXT, false);
+        state.hasNext = false;
       }
 
-      commit(mutations.SET_IS_LOADING, false);
+      state.isLoading = false;
     },
   },
 });

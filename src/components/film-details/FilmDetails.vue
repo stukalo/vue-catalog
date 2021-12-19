@@ -39,7 +39,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import * as actions from '../../constants/actions';
+import * as actions from '../../store/actions';
 import { DEFAULT_SELECTED_FILM_ID } from '../../constants/common';
 
 export default {
