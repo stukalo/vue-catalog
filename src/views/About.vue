@@ -36,7 +36,9 @@ export default {
   },
   watch: {
     $route() {
-      this.selectedChange(this.$route.params.id);
+      if (this.$route.params.id) {
+        this.selectedChange(this.$route.params.id);
+      }
     }
   },
   methods: {

@@ -45,7 +45,7 @@ import { DEFAULT_SELECTED_FILM_ID } from '../../constants/common';
 export default {
   name: 'FilmDetails',
   beforeMount() {
-    if (!this.film) {
+    if (!this.film || this.film.id.toString() !== this.$route?.params.id) {
       const id = this.$route?.params.id || DEFAULT_SELECTED_FILM_ID;
       this.selectedChange(id);
     }
