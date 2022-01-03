@@ -14,7 +14,7 @@
            :key="item.id"
            @click.native="this.scrollToTop()"
       >
-        <router-link :to="{path: `/about/${item.id}`}">
+        <router-link :to="{path: `/about/${item.id}`, query: this.$route.query}">
           <FilmCard :film="item"/>
         </router-link>
       </div>

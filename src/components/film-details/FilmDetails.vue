@@ -22,11 +22,11 @@
         <div class="info_stats stats">
           <div class="stats_year year">
             <span class="year_value">{{film.year}}</span>
-            <span class="year_units">year</span>
+            <span class="year_units">{{$translate('YEAR')}}</span>
           </div>
           <div class="stats_duration duration">
             <span class="duration_value">{{film.runtime}}</span>
-            <span class="duration_units">min</span>
+            <span class="duration_units">{{$translate('MIN')}}</span>
           </div>
         </div>
         <div class="info_plot">

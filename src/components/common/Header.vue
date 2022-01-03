@@ -6,7 +6,7 @@
       </router-link>
     </div>
     <nav class="header_navigation navigation" v-if="this.$route?.path !== '/'">
-      <router-link to="/">
+      <router-link :to="{path: '/', query: this.$route.query}">
         <div class="navigation_icon-search"/>
       </router-link>
     </nav>
@@ -24,6 +24,7 @@ export default {
 </script>
 <style scoped lang="less">
 @import "../../assets/css/variables.less";
+
 .header {
   z-index: 1;
   display: flex;

@@ -1,6 +1,8 @@
 import { createStore } from 'vuex';
 import * as actions from './actions';
 import { getFilms } from '../mock/api';
+import { getSearchParam } from '../utils/url';
+import { DEFAULT_LANG } from '../constants/common';
 
 export default createStore({
   state: {
@@ -16,6 +18,7 @@ export default createStore({
       by: 'title',
       value: '',
     },
+    lang: getSearchParam('lang') || DEFAULT_LANG,
   },
   actions: {
     [actions.SEARCH_SUBMIT]: ({ dispatch }) => {
@@ -33,12 +36,13 @@ export default createStore({
       state.search.value = value;
     },
     [actions.SELECTED_CHANGE]: ({ state }, id) => {
-      getFilms({ search: { by: 'id', value: Number(id) } }).then((films) => {
+      const { lang } = state;
+      getFilms({ search: { by: 'id', value: Number(id) }, lang }).then((films) => {
         state.film = films[0] || null;
       });
     },
     [actions.GET_INITIAL_SEARCH_RESULTS]: async ({ state }) => {
-      const { sort, search } = state;
+      const { sort, search, lang } = state;
 
       state.results = [];
       state.hasNext = true;
@@ -47,6 +51,7 @@ export default createStore({
       const results = await getFilms({
         sort,
         search,
+        lang,
       });
 
       if (results.length) {
@@ -58,13 +63,14 @@ export default createStore({
       state.isLoading = false;
     },
     [actions.GET_NEXT_SEARCH_RESULTS]: async ({ state }) => {
-      const { sort, search, results } = state;
+      const { sort, search, results, lang } = state;
       state.isLoading = true;
 
       const nextResults = await getFilms({
         from: results.length,
         sort,
         search,
+        lang,
       });
 
       if (results.length) {

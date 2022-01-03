@@ -1,6 +1,11 @@
 // https://my-json-server.typicode.com/stukalo/movies/films/348350
 
-import films from './films.json';
+import films_en from './films_en.json';
+import films_ru from './films_ru.json';
+const films = {
+  en: films_en,
+  ru: films_ru,
+};
 
 const sortBy = (items, sort) => items.sort((a, b) => {
   if (a[sort.by] === b[sort.by]) {
@@ -43,12 +48,14 @@ export const getFilms = (query) => new Promise((resolve) => {
         dir: 'desc',
       },
       search = null,
+      lang = 'en',
     } = query;
 
     const searchFunction = getSearchFunction(search);
+    const data = films[lang] || [];
     const filtered = (search && search.value)
-      ? films.filter(searchFunction)
-      : films;
+      ? data.filter(searchFunction)
+      : data;
     const sorted = sortBy(filtered, sort);
     const result = sorted.slice(from, from + count);
     resolve(result);

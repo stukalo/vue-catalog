@@ -6,7 +6,7 @@
       ref="search-input"
       autocomplete="off"
       spellcheck="false"
-      placeholder="Search"
+      :placeholder="placeholder"
       @input="this.onInput"
       :value="search.value"
     />
@@ -15,7 +15,7 @@
       class='search_button'
       @click="this.onSubmit"
     >
-      Search
+      {{buttonText}}
     </Button>
   </div>
 </template>
@@ -28,7 +28,19 @@ export default {
   components: {
     Button,
   },
-  props: ['search'],
+  props: {
+    search: {
+      default: {
+        value: '',
+      }
+    },
+    placeholder: {
+      default: 'Search'
+    },
+    buttonText: {
+      default: 'Search',
+    },
+  },
   methods: {
     onSubmit() {
       this.$emit('submit');

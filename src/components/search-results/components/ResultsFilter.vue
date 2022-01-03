@@ -1,7 +1,7 @@
 <template>
   <div class="results-filter">
     <div class="results-filter_sorting">
-      <Toggle title="Sort By"
+      <Toggle :title="$translate('SORT_BY')"
               :options="this.getSortingOptions()"
               @change="this.onSortByChange"
       />
@@ -27,12 +27,12 @@ export default {
       return [
         {
           value: 'year',
-          text: 'Release date',
+          text: this.$translate('RELEASE_DATE'),
           active: this.sort?.by === 'year',
         },
         {
           value: 'rating',
-          text: 'Rating',
+          text: this.$translate('RATING'),
           active: this.sort?.by === 'rating',
         },
       ];

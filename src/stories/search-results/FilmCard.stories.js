@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { action } from '@storybook/addon-actions';
 import FilmCard from '../../components/search-results/components/FilmCard.vue';
-import films from '../../mock/films.json';
+import films from '../../mock/films_en.json';
 
 export default {
   title: 'search-results/FilmCard',

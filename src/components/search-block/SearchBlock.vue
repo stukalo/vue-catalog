@@ -4,15 +4,17 @@
       <div class="layer_image"/>
     </div>
     <div class="search-block_search search">
-      <h1>Find your movie</h1>
+      <h1>{{$translate('FIND_YOUR_MOVIE')}}</h1>
       <div class="search_search">
         <Search :search="search"
                 @submit="this.onSubmit"
                 @valueChange="this.onSearchValueChange"
+                :placeholder="$translate('SEARCH')"
+                :buttonText="$translate('SEARCH')"
         />
       </div>
       <div class="search_toggle">
-        <Toggle title="Search by"
+        <Toggle :title="$translate('SEARCH_BY')"
                 :options="this.getFilterOptions()"
                 @change="this.onSearchByChange"
         />
@@ -45,11 +47,11 @@ export default {
     getFilterOptions() {
       return [{
         value: 'title',
-        text: 'Title',
+        text: this.$translate('TITLE'),
         active: this.search.by === 'title',
       }, {
         value: 'genre',
-        text: 'Genre',
+        text: this.$translate('GENRE'),
         active: this.search.by === 'genre',
       }];
     },
