@@ -1,7 +1,6 @@
-// https://my-json-server.typicode.com/stukalo/movies/films/348350
+import films_en from '../../mock/films_en.json';
+import films_ru from '../../mock/films_ru.json';
 
-import films_en from './films_en.json';
-import films_ru from './films_ru.json';
 const films = {
   en: films_en,
   ru: films_ru,
@@ -19,7 +18,7 @@ const sortBy = (items, sort) => items.sort((a, b) => {
   return sort.dir === 'asc' ? -1 : 1;
 });
 
-export const getSearchFunction = (search) => {
+const getSearchFunction = (search) => {
   if (!search.value || !search.by) {
     return null;
   }
@@ -38,7 +37,7 @@ export const getSearchFunction = (search) => {
   }
 };
 
-export const getFilms = (query) => new Promise((resolve) => {
+const getFilms = (query) => new Promise((resolve) => {
   try {
     const {
       from = 0,
@@ -63,3 +62,19 @@ export const getFilms = (query) => new Promise((resolve) => {
     resolve([]);
   }
 });
+
+const getFilm = ({
+  id,
+  lang = 'en'
+}) => new Promise((resolve) => {
+  const data = films[lang] || [];
+  const result = data.find(film => film.id === id);
+  resolve(result);
+});
+
+const ApiServiceMock = {
+  getFilms,
+  getFilm,
+};
+
+export default ApiServiceMock;

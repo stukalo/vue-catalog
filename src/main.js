@@ -5,6 +5,7 @@ import store from './store';
 import i18n from './plugins/i18n';
 import { getSearchParam } from './utils/url';
 import { DEFAULT_LANG } from './constants/common';
+import common from './plugins/common';
 
 const app = createApp(App).use(store).use(router);
 
@@ -14,3 +15,4 @@ import(`./locales/${lang}.json`).then(locale => {
   app.mount('#app');
 });
 
+app.use(common);

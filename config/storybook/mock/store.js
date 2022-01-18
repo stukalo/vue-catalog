@@ -1,12 +1,27 @@
 import { createStore } from 'vuex';
-import * as actions from './actions';
-import ApiService from '../core/api/ApiService';
-import { getSearchParam } from '../utils/url';
-import { DEFAULT_LANG } from '../constants/common';
+import * as actions from '../../../src/store/actions';
+import ApiService from '../../../src/core/api/ApiService';
+import { getSearchParam } from '../../../src/utils/url';
+import { DEFAULT_LANG } from '../../../src/constants/common';
 
 export default createStore({
   state: {
-    film: null,
+    film: {
+      "id": 2,
+      "title": "The Cotton Club",
+      "year": "1984",
+      "runtime": "127",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Music"
+      ],
+      "director": "Francis Ford Coppola",
+      "actors": "Richard Gere, Gregory Hines, Diane Lane, Lonette McKee",
+      "plot": "The Cotton Club was a famous night club in Harlem. The story follows the people that visited the club, those that ran it, and is peppered with the Jazz music that made it so famous.",
+      "posterUrl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTU5ODAyNzA4OV5BMl5BanBnXkFtZTcwNzYwNTIzNA@@._V1_SX300.jpg",
+      "rating": "4.1"
+    },
     isLoading: false,
     hasNext: true,
     results: [],

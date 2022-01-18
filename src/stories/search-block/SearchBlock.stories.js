@@ -1,7 +1,7 @@
 import SearchBlock from '../../components/search-block/SearchBlock.vue';
 import withStore from '../../../config/storybook/decorators/withStore';
 import withTranslate from '../../../config/storybook/decorators/withTranslate';
-import store from '../../store';
+import store from '../../../config/storybook/mock/store';
 
 export default {
   title: 'search-block/SearchBlock',

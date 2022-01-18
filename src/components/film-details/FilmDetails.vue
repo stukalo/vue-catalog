@@ -5,7 +5,7 @@
     </div>
     <div class="film-details_film film" v-if="!!film">
       <div class="film_poster">
-        <img :src="film.posterUrl"/>
+        <img :src="film.posterUrl" @error="$replaceImg404"/>
       </div>
       <div class="film_info info">
         <div class="info_title-block title-block">
@@ -17,11 +17,11 @@
           </div>
         </div>
         <div class="info_genre">
-          <span>{{film.genres.join(', ')}}</span>
+          <span>{{film.genres?.join(', ')}}</span>
         </div>
         <div class="info_stats stats">
           <div class="stats_year year">
-            <span class="year_value">{{film.year}}</span>
+            <span class="year_value">{{ film.year }}</span>
             <span class="year_units">{{$translate('YEAR')}}</span>
           </div>
           <div class="stats_duration duration">
@@ -45,7 +45,8 @@ import { DEFAULT_SELECTED_FILM_ID } from '../../constants/common';
 export default {
   name: 'FilmDetails',
   beforeMount() {
-    if (!this.film || this.film.id.toString() !== this.$route?.params.id) {
+    if (!this.film || (this.$route?.params?.id && this.film.id?.toString() !== this.$route?.params.id)) {
+      console.log('> ', this.film);
       const id = this.$route?.params.id || DEFAULT_SELECTED_FILM_ID;
       this.selectedChange(id);
     }

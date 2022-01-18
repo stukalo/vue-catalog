@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header_logo">
-      <router-link to="/">
+      <router-link :to="{path: '/', query: this.$route.query}">
         <Logo/>
       </router-link>
     </div>

@@ -6,7 +6,7 @@ import store from '../../store';
 
 export default {
   title: 'views/About',
-  decorators: [withStore(store), vueRouter(routes, { initialRoute: '/about/2' })],
+  decorators: [withStore(store), vueRouter(routes, { initialRoute: '/about/337167' })],
 };
 
 const AboutTemplate = () => ({

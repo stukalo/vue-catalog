@@ -1,7 +1,7 @@
 <template>
   <div class="film-card">
     <div class="film-card_poster">
-      <img :src="film.posterUrl"/>
+      <img :src="film.posterUrl" @error="$replaceImg404">
     </div>
     <div class="film-card_description description">
       <div class="description_title-block title-block">

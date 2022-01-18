@@ -5,8 +5,8 @@
     </div>
     <ul class="toggle_options options">
       <li class='options_item'
-          v-bind:class="option.active && 'active'"
           v-for="option in options"
+          v-bind:class="option.active && 'active'"
           :key="option.value"
           @click="this.onChange(option.value)"
       >
@@ -21,7 +21,10 @@
 <script>
 export default {
   name: 'Toggle',
-  props: ['title', 'options'],
+  props: {
+    title: { type: String, default: '' },
+    options: { type: Array, default: [] },
+  },
   methods: {
     onChange(value) {
       this.$emit('change', value);
