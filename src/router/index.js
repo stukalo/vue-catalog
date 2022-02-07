@@ -8,10 +8,15 @@ export const routes = [
     component: Home,
   },
   {
-    path: '/about/:id',
+    path: '/about/:id(\\d+)',
     name: 'About',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
+  {
+    path: '/:catchAll(.*)',
+    name: 'default',
+    component: () => import(/* webpackChunkName: "404" */ '../views/NotFound.vue'),
+  }
 ];
 
 const router = createRouter({

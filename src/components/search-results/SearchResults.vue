@@ -7,7 +7,8 @@
       <div class="search-results_empty"
            v-if="!this.results.length"
       >
-        <span>No films found</span>
+        <span v-if="!this.isLoading">No films found</span>
+        <Spinner v-if="this.isLoading"/>
       </div>
       <div class="search-results_card"
            v-for="item in this.results"
@@ -27,10 +28,12 @@ import { mapState, mapActions } from 'vuex';
 import FilmCard from './components/FilmCard.vue';
 import ResultsFilter from './components/ResultsFilter.vue';
 import * as actions from '../../store/actions';
+import Spinner from '../common/Spinner';
 
 export default {
   name: 'SearchResults',
   components: {
+    Spinner,
     ResultsFilter,
     FilmCard,
   },
